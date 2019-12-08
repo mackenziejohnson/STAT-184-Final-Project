@@ -70,7 +70,17 @@ SprintingRecords
 olympicAthleteData <-
   olympicAthleteData%>%
   select(Name, Sex, Age, Team, Year, Sport, Event, Medal)%>%
-  filter(Sport == "Athletics")
+  filter(Sport == "Athletics") %>%
+  mutate(Name = as.character(Name),
+         Sex = as.character(Sex),
+         Sport = as.character(Sport),
+         Event = as.character(Event),
+         Medal = as.character(Medal)) %>%
+  filter(grepl(pattern = "\\d*metres$", Event)) %>%
+  mutate(Event = (gsub(pattern = "Athletics Women's|Athletics Men's", replacement = "", Event))) %>%
+  rename("Athlete(s)" = Name) %>%
+  rename("Nation" = Team)
+
 olympicAthleteData
 ```
 
