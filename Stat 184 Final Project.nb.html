@@ -1763,7 +1763,7 @@ library(DataComputing)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Research Question: How have athletes preformances changed overtime when looking at Olympic Games data? Load Data into RNotebook</p>
+<p>Research Question: How have athletes preformances changed overtime when looking at Olympic Games data? ### Load Primary Data Source into RNotebook</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ByaW1hcnkgRGF0YSBTb3VjcmVcbm9seW1waWNBdGhsZXRlRGF0YSA8LSByZWFkLmNzdihmaWxlLmNob29zZSgpKVxuZ2xpbXBzZShvbHltcGljQXRobGV0ZURhdGEpXG5gYGAifQ== -->
@@ -1771,51 +1771,31 @@ library(DataComputing)</code></pre>
 olympicAthleteData &lt;- read.csv(file.choose())
 glimpse(olympicAthleteData)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiT2JzZXJ2YXRpb25zOiAyNzEsMTE2XG5WYXJpYWJsZXM6IDE1XG4kIElEICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGludD5cdTAwMWJbMzltXHUwMDFiWzIzbSAxLCAyLCAzLCA0LCA1LCA1LCA1LCA1LCA1LCA1LCA2LCA2LCA2LCA2LCA2LCA2LCA2LCA2LCA3LCA3LCA34oCmXG4kIE5hbWUgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBBIERpamlhbmcsIEEgTGFtdXNpLCBHdW5uYXIgTmllbHNlbiBBYWJ5LCBFZGdhciBMaW5kZW5hdSBBYWJ54oCmXG4kIFNleCAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBNLCBNLCBNLCBNLCBGLCBGLCBGLCBGLCBGLCBGLCBNLCBNLCBNLCBNLCBNLCBNLCBNLCBNLCBNLCBNLCBN4oCmXG4kIEFnZSAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGludD5cdTAwMWJbMzltXHUwMDFiWzIzbSAyNCwgMjMsIDI0LCAzNCwgMjEsIDIxLCAyNSwgMjUsIDI3LCAyNywgMzEsIDMxLCAzMSwgMzEsIDMzLCAz4oCmXG4kIEhlaWdodCBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGludD5cdTAwMWJbMzltXHUwMDFiWzIzbSAxODAsIDE3MCwgTkEsIE5BLCAxODUsIDE4NSwgMTg1LCAxODUsIDE4NSwgMTg1LCAxODgsIDE4OCwgMTg44oCmXG4kIFdlaWdodCBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGRibD5cdTAwMWJbMzltXHUwMDFiWzIzbSA4MCwgNjAsIE5BLCBOQSwgODIsIDgyLCA4MiwgODIsIDgyLCA4MiwgNzUsIDc1LCA3NSwgNzUsIDc1LCA34oCmXG4kIFRlYW0gICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBDaGluYSwgQ2hpbmEsIERlbm1hcmssIERlbm1hcmsvU3dlZGVuLCBOZXRoZXJsYW5kcywgTmV0aGVybGFu4oCmXG4kIE5PQyAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBDSE4sIENITiwgREVOLCBERU4sIE5FRCwgTkVELCBORUQsIE5FRCwgTkVELCBORUQsIFVTQSwgVVNBLCBV4oCmXG4kIEdhbWVzICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSAxOTkyIFN1bW1lciwgMjAxMiBTdW1tZXIsIDE5MjAgU3VtbWVyLCAxOTAwIFN1bW1lciwgMTk4OCBXaW504oCmXG4kIFllYXIgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGludD5cdTAwMWJbMzltXHUwMDFiWzIzbSAxOTkyLCAyMDEyLCAxOTIwLCAxOTAwLCAxOTg4LCAxOTg4LCAxOTkyLCAxOTkyLCAxOTk0LCAxOTk0LCAx4oCmXG4kIFNlYXNvbiBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBTdW1tZXIsIFN1bW1lciwgU3VtbWVyLCBTdW1tZXIsIFdpbnRlciwgV2ludGVyLCBXaW50ZXIsIFdpbnRl4oCmXG4kIENpdHkgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBCYXJjZWxvbmEsIExvbmRvbiwgQW50d2VycGVuLCBQYXJpcywgQ2FsZ2FyeSwgQ2FsZ2FyeSwgQWxiZXJ04oCmXG4kIFNwb3J0ICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBCYXNrZXRiYWxsLCBKdWRvLCBGb290YmFsbCwgVHVnLU9mLVdhciwgU3BlZWQgU2thdGluZywgU3BlZWQg4oCmXG4kIEV2ZW50ICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIkJhc2tldGJhbGwgTWVuJ3MgQmFza2V0YmFsbFwiLCBcIkp1ZG8gTWVuJ3MgRXh0cmEtTGlnaHR3ZWlnaHRcIuKAplxuJCBNZWRhbCAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxmY3Q+XHUwMDFiWzM5bVx1MDAxYlsyM20gTkEsIE5BLCBOQSwgR29sZCwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLOKAplxuIn0= -->
-<pre><code>Observations: 271,116
-Variables: 15
-$ ID     [3m[38;5;246m&lt;int&gt;[39m[23m 1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7…
-$ Name   [3m[38;5;246m&lt;fct&gt;[39m[23m A Dijiang, A Lamusi, Gunnar Nielsen Aaby, Edgar Lindenau Aaby…
-$ Sex    [3m[38;5;246m&lt;fct&gt;[39m[23m M, M, M, M, F, F, F, F, F, F, M, M, M, M, M, M, M, M, M, M, M…
-$ Age    [3m[38;5;246m&lt;int&gt;[39m[23m 24, 23, 24, 34, 21, 21, 25, 25, 27, 27, 31, 31, 31, 31, 33, 3…
-$ Height [3m[38;5;246m&lt;int&gt;[39m[23m 180, 170, NA, NA, 185, 185, 185, 185, 185, 185, 188, 188, 188…
-$ Weight [3m[38;5;246m&lt;dbl&gt;[39m[23m 80, 60, NA, NA, 82, 82, 82, 82, 82, 82, 75, 75, 75, 75, 75, 7…
-$ Team   [3m[38;5;246m&lt;fct&gt;[39m[23m China, China, Denmark, Denmark/Sweden, Netherlands, Netherlan…
-$ NOC    [3m[38;5;246m&lt;fct&gt;[39m[23m CHN, CHN, DEN, DEN, NED, NED, NED, NED, NED, NED, USA, USA, U…
-$ Games  [3m[38;5;246m&lt;fct&gt;[39m[23m 1992 Summer, 2012 Summer, 1920 Summer, 1900 Summer, 1988 Wint…
-$ Year   [3m[38;5;246m&lt;int&gt;[39m[23m 1992, 2012, 1920, 1900, 1988, 1988, 1992, 1992, 1994, 1994, 1…
-$ Season [3m[38;5;246m&lt;fct&gt;[39m[23m Summer, Summer, Summer, Summer, Winter, Winter, Winter, Winte…
-$ City   [3m[38;5;246m&lt;fct&gt;[39m[23m Barcelona, London, Antwerpen, Paris, Calgary, Calgary, Albert…
-$ Sport  [3m[38;5;246m&lt;fct&gt;[39m[23m Basketball, Judo, Football, Tug-Of-War, Speed Skating, Speed …
-$ Event  [3m[38;5;246m&lt;fct&gt;[39m[23m &quot;Basketball Men's Basketball&quot;, &quot;Judo Men's Extra-Lightweight&quot;…
-$ Medal  [3m[38;5;246m&lt;fct&gt;[39m[23m NA, NA, NA, Gold, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>This data set contains information about every athlete that has competed in the Olympics. A case is an Olympic athlete and there are 15 variables to describe each athlete and their participation in the Olympics.</p>
+<div id="load-secondary-data-source-into-rnotebook" class="section level3">
+<h3>Load Secondary Data Source into RNotebook</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xpbXBzZSh0YWJsZUxpc3RbWzFdXSlcblxuYGBgIn0= -->
-<pre class="r"><code>glimpse(tableList[[1]])
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShydmVzdClcbnBhZ2UgPC0gXCJodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9MaXN0X29mX09seW1waWNfcmVjb3Jkc19pbl9hdGhsZXRpY3NcIlxudGFibGVMaXN0IDwtIHBhZ2UgJT4lXG4gIHJlYWRfaHRtbCgpICU+JVxuICBodG1sX25vZGVzKGNzcyA9IFwidGFibGVcIikgJT4lXG4gIGh0bWxfdGFibGUoZmlsbCA9IFRSVUUpXG5cbmdsaW1wc2UodGFibGVMaXN0W1sxXV0pXG5nbGltcHNlKHRhYmxlTGlzdFtbMl1dKVxuYGBgIn0= -->
+<pre class="r"><code>library(rvest)
+page &lt;- &quot;https://en.wikipedia.org/wiki/List_of_Olympic_records_in_athletics&quot;
+tableList &lt;- page %&gt;%
+  read_html() %&gt;%
+  html_nodes(css = &quot;table&quot;) %&gt;%
+  html_table(fill = TRUE)
+
+glimpse(tableList[[1]])
+glimpse(tableList[[2]])</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiT2JzZXJ2YXRpb25zOiAyNVxuVmFyaWFibGVzOiA3XG4kIEV2ZW50ICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIjEwMCBtZXRyZXNcIiwgXCIyMDAgbWV0cmVzXCIsIFwiNDAwIG1ldHJlc1wiLCBcIjgwMCBtZXRyZXNcIizigKZcbiQgUmVjb3JkICAgICAgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtIFwiOS42M1wiLCBcIjE5LjMwXCIsIFwi4pmmNDMuMDNcIiwgXCLimaYxOjQwLjkxXCIsIFwiMzozMi4wN1wiLCBcIjEyOjXigKZcbiQgYEF0aGxldGUocylgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtIFwiVXNhaW4gQm9sdFwiLCBcIlVzYWluIEJvbHRcIiwgXCJXYXlkZSB2YW4gTmlla2Vya1wiLCBcIkRhdmlk4oCmXG4kIE5hdGlvbiAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIkphbWFpY2HCoChKQU0pXCIsIFwiSmFtYWljYcKgKEpBTSlcIiwgXCJTb3V0aCBBZnJpY2HCoChSU0EpXCIs4oCmXG4kIEdhbWVzICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIjIwMTIgTG9uZG9uXCIsIFwiMjAwOCBCZWlqaW5nXCIsIFwiMjAxNiBSaW8gZGUgSmFuZWlyb1wiLCBcIuKAplxuJCBEYXRlICAgICAgICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gXCJBdWd1c3QgNSwgMjAxMlwiLCBcIkF1Z3VzdCAyMCwgMjAwOFwiLCBcIkF1Z3VzdCAxNCwgMjAxNlwiLOKAplxuJCBgUmVmKHMpYCAgICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gXCJbOV1cIiwgXCJbMTBdXCIsIFwiWzExXVwiLCBcIlsxMl1cIiwgXCJbMTNdXCIsIFwiWzE0XVwiLCBcIlsxNV1cIiwg4oCmXG4ifQ== -->
-<pre><code>Observations: 25
-Variables: 7
-$ Event        [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;100 metres&quot;, &quot;200 metres&quot;, &quot;400 metres&quot;, &quot;800 metres&quot;,…
-$ Record       [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;9.63&quot;, &quot;19.30&quot;, &quot;♦43.03&quot;, &quot;♦1:40.91&quot;, &quot;3:32.07&quot;, &quot;12:5…
-$ `Athlete(s)` [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Usain Bolt&quot;, &quot;Usain Bolt&quot;, &quot;Wayde van Niekerk&quot;, &quot;David…
-$ Nation       [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;Jamaica (JAM)&quot;, &quot;Jamaica (JAM)&quot;, &quot;South Africa (RSA)&quot;,…
-$ Games        [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;2012 London&quot;, &quot;2008 Beijing&quot;, &quot;2016 Rio de Janeiro&quot;, &quot;…
-$ Date         [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;August 5, 2012&quot;, &quot;August 20, 2008&quot;, &quot;August 14, 2016&quot;,…
-$ `Ref(s)`     [3m[38;5;246m&lt;chr&gt;[39m[23m &quot;[9]&quot;, &quot;[10]&quot;, &quot;[11]&quot;, &quot;[12]&quot;, &quot;[13]&quot;, &quot;[14]&quot;, &quot;[15]&quot;, …</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>These lists are from Wikipedia and they are a list of both the male and female current olympic records in the track and field events. Each case represents a different event and then has the current record and the athlete who currently hold that record. The tablelist 1 is the male records and the tablelist 2 is the female records.</p>
 <!-- rnb-text-end -->
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAxODQgRmluYWwgUHJvamVjdCIKbmFtZXM6ICJNYWNrZW56aWUgSm9obnNvbiAmIElzYWJlbGxhIFNhbnRvcmkiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCmBgYHtyfQojIGNsZWFuIHVwIHRoZSBSU3R1ZGlvIGVudmlyb25tZW50IApybShsaXN0ID0gbHMoKSkKCiMgbG9hZCBhbGwgcGFja2FnZXMKbGlicmFyeShtb3NhaWMpCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShEYXRhQ29tcHV0aW5nKQpgYGAKClJlc2VhcmNoIFF1ZXN0aW9uOiBIb3cgaGF2ZSBhdGhsZXRlcyBwcmVmb3JtYW5jZXMgY2hhbmdlZCBvdmVydGltZSB3aGVuIGxvb2tpbmcgYXQgT2x5bXBpYyBHYW1lcyBkYXRhPyAKTG9hZCBEYXRhIGludG8gUk5vdGVib29rCmBgYHtyfQojUHJpbWFyeSBEYXRhIFNvdWNyZQpvbHltcGljQXRobGV0ZURhdGEgPC0gcmVhZC5jc3YoZmlsZS5jaG9vc2UoKSkKZ2xpbXBzZShvbHltcGljQXRobGV0ZURhdGEpCmBgYApUaGlzIGRhdGEgc2V0IGNvbnRhaW5zIGluZm9ybWF0aW9uIGFib3V0IGV2ZXJ5IGF0aGxldGUgdGhhdCBoYXMgY29tcGV0ZWQgaW4gdGhlIE9seW1waWNzLiBBIGNhc2UgaXMgYW4gT2x5bXBpYyBhdGhsZXRlIGFuZCB0aGVyZSBhcmUgMTUgdmFyaWFibGVzIHRvIGRlc2NyaWJlIGVhY2ggYXRobGV0ZSBhbmQgdGhlaXIgcGFydGljaXBhdGlvbiBpbiB0aGUgT2x5bXBpY3MuIAoKYGBge3J9CmxpYnJhcnkocnZlc3QpCnBhZ2UgPC0gImh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0xpc3Rfb2ZfT2x5bXBpY19yZWNvcmRzX2luX2F0aGxldGljcyIKdGFibGVMaXN0IDwtIHBhZ2UgJT4lCiAgcmVhZF9odG1sKCkgJT4lCiAgaHRtbF9ub2Rlcyhjc3MgPSAidGFibGUiKSAlPiUKICBodG1sX3RhYmxlKGZpbGwgPSBUUlVFKQoKZ2xpbXBzZSh0YWJsZUxpc3RbWzFdXSkKZ2xpbXBzZSh0YWJsZUxpc3RbWzJdXSkKYGBgClRoZXNlIGxpc3RzIGFyZSBmcm9tIFdpa2lwZWRpYSBhbmQgdGhleSBhcmUgYSBsaXN0IG9mIGJvdGggdGhlIG1hbGUgYW5kIGZlbWFsZSBjdXJyZW50IG9seW1waWMgcmVjb3JkcyBpbiB0aGUgdHJhY2sgYW5kIGZpZWxkIGV2ZW50cy4gRWFjaCBjYXNlIHJlcHJlc2VudHMgYSBkaWZmZXJlbnQgZXZlbnQgYW5kIHRoZW4gaGFzIHRoZSBjdXJyZW50IHJlY29yZCBhbmQgdGhlIGF0aGxldGUgd2hvIGN1cnJlbnRseSBob2xkIHRoYXQgcmVjb3JkLiBUaGUgdGFibGVsaXN0IDEgaXMgdGhlIG1hbGUgcmVjb3JkcyBhbmQgdGhlIHRhYmxlbGlzdCAyIGlzIHRoZSBmZW1hbGUgcmVjb3Jkcy4gCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAxODQgRmluYWwgUHJvamVjdCIKbmFtZXM6ICJNYWNrZW56aWUgSm9obnNvbiAmIElzYWJlbGxhIFNhbnRvcmkiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCmBgYHtyfQojIGNsZWFuIHVwIHRoZSBSU3R1ZGlvIGVudmlyb25tZW50IApybShsaXN0ID0gbHMoKSkKCiMgbG9hZCBhbGwgcGFja2FnZXMKbGlicmFyeShtb3NhaWMpCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShEYXRhQ29tcHV0aW5nKQpgYGAKClJlc2VhcmNoIFF1ZXN0aW9uOiBIb3cgaGF2ZSBhdGhsZXRlcyBwcmVmb3JtYW5jZXMgY2hhbmdlZCBvdmVydGltZSB3aGVuIGxvb2tpbmcgYXQgT2x5bXBpYyBHYW1lcyBkYXRhPyAKIyMjIExvYWQgUHJpbWFyeSBEYXRhIFNvdXJjZSBpbnRvIFJOb3RlYm9vawpgYGB7cn0KI1ByaW1hcnkgRGF0YSBTb3VjcmUKb2x5bXBpY0F0aGxldGVEYXRhIDwtIHJlYWQuY3N2KGZpbGUuY2hvb3NlKCkpCmdsaW1wc2Uob2x5bXBpY0F0aGxldGVEYXRhKQpgYGAKVGhpcyBkYXRhIHNldCBjb250YWlucyBpbmZvcm1hdGlvbiBhYm91dCBldmVyeSBhdGhsZXRlIHRoYXQgaGFzIGNvbXBldGVkIGluIHRoZSBPbHltcGljcy4gQSBjYXNlIGlzIGFuIE9seW1waWMgYXRobGV0ZSBhbmQgdGhlcmUgYXJlIDE1IHZhcmlhYmxlcyB0byBkZXNjcmliZSBlYWNoIGF0aGxldGUgYW5kIHRoZWlyIHBhcnRpY2lwYXRpb24gaW4gdGhlIE9seW1waWNzLiAKCiMjIyBMb2FkIFNlY29uZGFyeSBEYXRhIFNvdXJjZSBpbnRvIFJOb3RlYm9vawpgYGB7cn0KbGlicmFyeShydmVzdCkKcGFnZSA8LSAiaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTGlzdF9vZl9PbHltcGljX3JlY29yZHNfaW5fYXRobGV0aWNzIgp0YWJsZUxpc3QgPC0gcGFnZSAlPiUKICByZWFkX2h0bWwoKSAlPiUKICBodG1sX25vZGVzKGNzcyA9ICJ0YWJsZSIpICU+JQogIGh0bWxfdGFibGUoZmlsbCA9IFRSVUUpCgpnbGltcHNlKHRhYmxlTGlzdFtbMV1dKQpnbGltcHNlKHRhYmxlTGlzdFtbMl1dKQpgYGAKVGhlc2UgbGlzdHMgYXJlIGZyb20gV2lraXBlZGlhIGFuZCB0aGV5IGFyZSBhIGxpc3Qgb2YgYm90aCB0aGUgbWFsZSBhbmQgZmVtYWxlIGN1cnJlbnQgb2x5bXBpYyByZWNvcmRzIGluIHRoZSB0cmFjayBhbmQgZmllbGQgZXZlbnRzLiBFYWNoIGNhc2UgcmVwcmVzZW50cyBhIGRpZmZlcmVudCBldmVudCBhbmQgdGhlbiBoYXMgdGhlIGN1cnJlbnQgcmVjb3JkIGFuZCB0aGUgYXRobGV0ZSB3aG8gY3VycmVudGx5IGhvbGQgdGhhdCByZWNvcmQuIFRoZSB0YWJsZWxpc3QgMSBpcyB0aGUgbWFsZSByZWNvcmRzIGFuZCB0aGUgdGFibGVsaXN0IDIgaXMgdGhlIGZlbWFsZSByZWNvcmRzLiAK</div>
 
 
 

@@ -16,7 +16,7 @@ library(DataComputing)
 ```
 
 Research Question: How have athletes preformances changed overtime when looking at Olympic Games data? 
-Load Data into RNotebook
+### Load Primary Data Source into RNotebook
 ```{r}
 #Primary Data Soucre
 olympicAthleteData <- read.csv(file.choose())
@@ -24,6 +24,7 @@ glimpse(olympicAthleteData)
 ```
 This data set contains information about every athlete that has competed in the Olympics. A case is an Olympic athlete and there are 15 variables to describe each athlete and their participation in the Olympics. 
 
+### Load Secondary Data Source into RNotebook
 ```{r}
 library(rvest)
 page <- "https://en.wikipedia.org/wiki/List_of_Olympic_records_in_athletics"
