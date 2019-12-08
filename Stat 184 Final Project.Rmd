@@ -44,16 +44,5 @@ These lists are from Wikipedia and they are a list of both the male and female c
 malerecords<- tableList[[1]]
 femalerecords<- tableList[[2]]
 
-malerecords <- 
-  malerecords %>%
-    filter(grepl(pattern = "\\d*metres$", Event)) %>%
-    mutate(Record = ms(Record))
-malerecords
-
-femalerecords <-
-  femalerecords %>%
-    filter(grepl(pattern = "\\d*metres$", Event)) %>%
-    mutate(Record = ms(Record))
-femalerecords
 ```
 
