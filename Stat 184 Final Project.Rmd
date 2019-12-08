@@ -3,9 +3,23 @@ title: "STAT 184 Final Project"
 names: "Mackenzie Johnson & Isabella Santori"
 output: html_notebook
 ---
+
+```{r}
+# clean up the RStudio environment 
+rm(list = ls())
+
+# load all packages
+library(mosaic)
+library(tidyverse)
+library(lubridate)
+library(DataComputing)
+```
+
 Research Question: How have athletes preformances changed overtime when looking at Olympic Games data? 
 Load Data into RNotebook
 ```{r}
 #Primary Data Soucre
 olympicAthleteData <- read.csv(file.choose())
+glimpse(olympicAthleteData)
 ```
+This data set contains information about every athlete that has competed in the Olympics. A case is an Olympic athlete and there are 15 variables to describe each athlete and their participation in the Olympics. 
