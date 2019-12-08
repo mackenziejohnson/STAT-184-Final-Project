@@ -64,3 +64,13 @@ SprintingRecords <-
     full_join(femalerecords)
 SprintingRecords
 ```
+
+### Using Data Verbs on primary data set
+```{r}
+olympicAthleteData <-
+  olympicAthleteData%>%
+  select(Name, Sex, Age, Team, Year, Sport, Event, Medal)%>%
+  filter(Sport == "Athletics")
+olympicAthleteData
+```
+
