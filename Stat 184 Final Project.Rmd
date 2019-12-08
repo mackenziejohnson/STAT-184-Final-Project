@@ -57,3 +57,10 @@ femalerecords <-
 femalerecords
 ```
 
+### Joining Two Data Tables
+```{r}
+SprintingRecords <-
+  malerecords %>%
+    full_join(femalerecords)
+SprintingRecords
+```
