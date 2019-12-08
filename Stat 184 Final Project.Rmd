@@ -39,6 +39,7 @@ glimpse(tableList[[2]])
 These lists are from Wikipedia and they are a list of both the male and female current olympic records in the track and field events. Each case represents a different event and then has the current record and the athlete who currently hold that record. The tablelist 1 is the male records and the tablelist 2 is the female records. 
 
 # Data Wrangling 
+
 ### Regular Expression of Olympic Records table 
 ```{r}
 malerecords<- tableList[[1]]
