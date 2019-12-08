@@ -96,3 +96,14 @@ SprintingRecords <-
   
 SprintingRecords
 ```
+
+### Join primary and secondary data set
+```{r}
+completeOlympicData<- 
+  olympicAthleteData%>%
+  full_join(SprintingRecords)%>%
+  group_by(`Athlete(s)`, )%>%
+  arrange(Record)
+completeOlympicData
+```
+
