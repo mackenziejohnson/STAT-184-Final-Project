@@ -84,3 +84,15 @@ olympicAthleteData <-
 olympicAthleteData
 ```
 
+### Using Data verbs on secondary data set
+```{r}
+SprintingRecords <-
+  SprintingRecords %>%
+  select(Event, Record, Nation, Date, `Athlete(s)`) %>%
+  mutate(Date = mdy(Date),
+         Year = year(Date)) %>%
+  select(Event, Record, Nation, Year, `Athlete(s)`) %>%
+  mutate(Nation = (gsub(pattern = "\\(.{3}\\)$", replacement = "", Nation)))
+  
+SprintingRecords
+```
