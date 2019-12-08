@@ -1749,16 +1749,53 @@ summary {
 
 
 <!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjbGVhbiB1cCB0aGUgUlN0dWRpbyBlbnZpcm9ubWVudCBcbnJtKGxpc3QgPSBscygpKVxuXG4jIGxvYWQgYWxsIHBhY2thZ2VzXG5saWJyYXJ5KG1vc2FpYylcbmxpYnJhcnkodGlkeXZlcnNlKVxubGlicmFyeShsdWJyaWRhdGUpXG5saWJyYXJ5KERhdGFDb21wdXRpbmcpXG5gYGAifQ== -->
+<pre class="r"><code># clean up the RStudio environment 
+rm(list = ls())
+
+# load all packages
+library(mosaic)
+library(tidyverse)
+library(lubridate)
+library(DataComputing)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <p>Research Question: How have athletes preformances changed overtime when looking at Olympic Games data? Load Data into RNotebook</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ByaW1hcnkgRGF0YSBTb3VjcmVcbm9seW1waWNBdGhsZXRlRGF0YSA8LSByZWFkLmNzdihmaWxlLmNob29zZSgpKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ByaW1hcnkgRGF0YSBTb3VjcmVcbm9seW1waWNBdGhsZXRlRGF0YSA8LSByZWFkLmNzdihmaWxlLmNob29zZSgpKVxuZ2xpbXBzZShvbHltcGljQXRobGV0ZURhdGEpXG5gYGAifQ== -->
 <pre class="r"><code>#Primary Data Soucre
-olympicAthleteData &lt;- read.csv(file.choose())</code></pre>
+olympicAthleteData &lt;- read.csv(file.choose())
+glimpse(olympicAthleteData)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiT2JzZXJ2YXRpb25zOiAyNzEsMTE2XG5WYXJpYWJsZXM6IDE1XG4kIElEICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGludD5cdTAwMWJbMzltXHUwMDFiWzIzbSAxLCAyLCAzLCA0LCA1LCA1LCA1LCA1LCA1LCA1LCA2LCA2LCA2LCA2LCA2LCA2LCA2LCA2LCA3LCA34oCmXG4kIE5hbWUgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBBIERpamlhbmcsIEEgTGFtdXNpLCBHdW5uYXIgTmllbHNlbiBBYWJ5LCBFZGdhciBMaW5kZW5hdSBB4oCmXG4kIFNleCAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBNLCBNLCBNLCBNLCBGLCBGLCBGLCBGLCBGLCBGLCBNLCBNLCBNLCBNLCBNLCBNLCBNLCBNLCBNLCBN4oCmXG4kIEFnZSAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGludD5cdTAwMWJbMzltXHUwMDFiWzIzbSAyNCwgMjMsIDI0LCAzNCwgMjEsIDIxLCAyNSwgMjUsIDI3LCAyNywgMzEsIDMxLCAzMSwgMzEsIDMz4oCmXG4kIEhlaWdodCBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGludD5cdTAwMWJbMzltXHUwMDFiWzIzbSAxODAsIDE3MCwgTkEsIE5BLCAxODUsIDE4NSwgMTg1LCAxODUsIDE4NSwgMTg1LCAxODgsIDE4OCwg4oCmXG4kIFdlaWdodCBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGRibD5cdTAwMWJbMzltXHUwMDFiWzIzbSA4MCwgNjAsIE5BLCBOQSwgODIsIDgyLCA4MiwgODIsIDgyLCA4MiwgNzUsIDc1LCA3NSwgNzUsIDc14oCmXG4kIFRlYW0gICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBDaGluYSwgQ2hpbmEsIERlbm1hcmssIERlbm1hcmsvU3dlZGVuLCBOZXRoZXJsYW5kcywgTmV0aGVy4oCmXG4kIE5PQyAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBDSE4sIENITiwgREVOLCBERU4sIE5FRCwgTkVELCBORUQsIE5FRCwgTkVELCBORUQsIFVTQSwgVVNB4oCmXG4kIEdhbWVzICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSAxOTkyIFN1bW1lciwgMjAxMiBTdW1tZXIsIDE5MjAgU3VtbWVyLCAxOTAwIFN1bW1lciwgMTk4OCBX4oCmXG4kIFllYXIgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGludD5cdTAwMWJbMzltXHUwMDFiWzIzbSAxOTkyLCAyMDEyLCAxOTIwLCAxOTAwLCAxOTg4LCAxOTg4LCAxOTkyLCAxOTkyLCAxOTk0LCAxOTk04oCmXG4kIFNlYXNvbiBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBTdW1tZXIsIFN1bW1lciwgU3VtbWVyLCBTdW1tZXIsIFdpbnRlciwgV2ludGVyLCBXaW50ZXIsIFdp4oCmXG4kIENpdHkgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBCYXJjZWxvbmEsIExvbmRvbiwgQW50d2VycGVuLCBQYXJpcywgQ2FsZ2FyeSwgQ2FsZ2FyeSwgQWxi4oCmXG4kIFNwb3J0ICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBCYXNrZXRiYWxsLCBKdWRvLCBGb290YmFsbCwgVHVnLU9mLVdhciwgU3BlZWQgU2thdGluZywgU3Bl4oCmXG4kIEV2ZW50ICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBcIkJhc2tldGJhbGwgTWVuJ3MgQmFza2V0YmFsbFwiLCBcIkp1ZG8gTWVuJ3MgRXh0cmEtTGlnaHR3ZWln4oCmXG4kIE1lZGFsICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGZjdD5cdTAwMWJbMzltXHUwMDFiWzIzbSBOQSwgTkEsIE5BLCBHb2xkLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwg4oCmXG4ifQ== -->
+<pre><code>Observations: 271,116
+Variables: 15
+$ ID     [3m[38;5;246m&lt;int&gt;[39m[23m 1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7…
+$ Name   [3m[38;5;246m&lt;fct&gt;[39m[23m A Dijiang, A Lamusi, Gunnar Nielsen Aaby, Edgar Lindenau A…
+$ Sex    [3m[38;5;246m&lt;fct&gt;[39m[23m M, M, M, M, F, F, F, F, F, F, M, M, M, M, M, M, M, M, M, M…
+$ Age    [3m[38;5;246m&lt;int&gt;[39m[23m 24, 23, 24, 34, 21, 21, 25, 25, 27, 27, 31, 31, 31, 31, 33…
+$ Height [3m[38;5;246m&lt;int&gt;[39m[23m 180, 170, NA, NA, 185, 185, 185, 185, 185, 185, 188, 188, …
+$ Weight [3m[38;5;246m&lt;dbl&gt;[39m[23m 80, 60, NA, NA, 82, 82, 82, 82, 82, 82, 75, 75, 75, 75, 75…
+$ Team   [3m[38;5;246m&lt;fct&gt;[39m[23m China, China, Denmark, Denmark/Sweden, Netherlands, Nether…
+$ NOC    [3m[38;5;246m&lt;fct&gt;[39m[23m CHN, CHN, DEN, DEN, NED, NED, NED, NED, NED, NED, USA, USA…
+$ Games  [3m[38;5;246m&lt;fct&gt;[39m[23m 1992 Summer, 2012 Summer, 1920 Summer, 1900 Summer, 1988 W…
+$ Year   [3m[38;5;246m&lt;int&gt;[39m[23m 1992, 2012, 1920, 1900, 1988, 1988, 1992, 1992, 1994, 1994…
+$ Season [3m[38;5;246m&lt;fct&gt;[39m[23m Summer, Summer, Summer, Summer, Winter, Winter, Winter, Wi…
+$ City   [3m[38;5;246m&lt;fct&gt;[39m[23m Barcelona, London, Antwerpen, Paris, Calgary, Calgary, Alb…
+$ Sport  [3m[38;5;246m&lt;fct&gt;[39m[23m Basketball, Judo, Football, Tug-Of-War, Speed Skating, Spe…
+$ Event  [3m[38;5;246m&lt;fct&gt;[39m[23m &quot;Basketball Men's Basketball&quot;, &quot;Judo Men's Extra-Lightweig…
+$ Medal  [3m[38;5;246m&lt;fct&gt;[39m[23m NA, NA, NA, Gold, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>This data set contains information about every athlete that has competed in the Olympics. A case is an Olympic athlete and there are 15 variables to describe each athlete and their participation in the Olympics.</p>
+<!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAxODQgRmluYWwgUHJvamVjdCIKbmFtZXM6ICJNYWNrZW56aWUgSm9obnNvbiAmIElzYWJlbGxhIFNhbnRvcmkiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KUmVzZWFyY2ggUXVlc3Rpb246IEhvdyBoYXZlIGF0aGxldGVzIHByZWZvcm1hbmNlcyBjaGFuZ2VkIG92ZXJ0aW1lIHdoZW4gbG9va2luZyBhdCBPbHltcGljIEdhbWVzIGRhdGE/IApMb2FkIERhdGEgaW50byBSTm90ZWJvb2sKYGBge3J9CiNQcmltYXJ5IERhdGEgU291Y3JlCm9seW1waWNBdGhsZXRlRGF0YSA8LSByZWFkLmNzdihmaWxlLmNob29zZSgpKQpgYGAK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCAxODQgRmluYWwgUHJvamVjdCIKbmFtZXM6ICJNYWNrZW56aWUgSm9obnNvbiAmIElzYWJlbGxhIFNhbnRvcmkiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCmBgYHtyfQojIGNsZWFuIHVwIHRoZSBSU3R1ZGlvIGVudmlyb25tZW50IApybShsaXN0ID0gbHMoKSkKCiMgbG9hZCBhbGwgcGFja2FnZXMKbGlicmFyeShtb3NhaWMpCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShEYXRhQ29tcHV0aW5nKQpgYGAKClJlc2VhcmNoIFF1ZXN0aW9uOiBIb3cgaGF2ZSBhdGhsZXRlcyBwcmVmb3JtYW5jZXMgY2hhbmdlZCBvdmVydGltZSB3aGVuIGxvb2tpbmcgYXQgT2x5bXBpYyBHYW1lcyBkYXRhPyAKTG9hZCBEYXRhIGludG8gUk5vdGVib29rCmBgYHtyfQojUHJpbWFyeSBEYXRhIFNvdWNyZQpvbHltcGljQXRobGV0ZURhdGEgPC0gcmVhZC5jc3YoZmlsZS5jaG9vc2UoKSkKZ2xpbXBzZShvbHltcGljQXRobGV0ZURhdGEpCmBgYApUaGlzIGRhdGEgc2V0IGNvbnRhaW5zIGluZm9ybWF0aW9uIGFib3V0IGV2ZXJ5IGF0aGxldGUgdGhhdCBoYXMgY29tcGV0ZWQgaW4gdGhlIE9seW1waWNzLiBBIGNhc2UgaXMgYW4gT2x5bXBpYyBhdGhsZXRlIGFuZCB0aGVyZSBhcmUgMTUgdmFyaWFibGVzIHRvIGRlc2NyaWJlIGVhY2ggYXRobGV0ZSBhbmQgdGhlaXIgcGFydGljaXBhdGlvbiBpbiB0aGUgT2x5bXBpY3MuIA==</div>
 
 
 
