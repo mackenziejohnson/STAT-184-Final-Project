@@ -15,7 +15,8 @@ library(lubridate)
 library(DataComputing)
 ```
 
-Research Question: How have athletes preformances changed overtime when looking at Olympic Games data? 
+# Research Question: How have athletes preformances changed overtime when looking at Olympic Games data? 
+
 ### Load Primary Data Source into RNotebook
 ```{r}
 #Primary Data Soucre
@@ -95,7 +96,8 @@ SprintingRecords <-
   mutate(Date = mdy(Date),
          Year = year(Date)) %>%
   select(Event, Record, Nation, Year, `Athlete(s)`, Sex) %>%
-  mutate(Nation = (gsub(pattern = "\\(.{3}\\)$", replacement = "", Nation)))
+  mutate(Nation = (gsub(pattern = "\\(.{3}\\)$", replacement = "", Nation))) %>%
+  mutate(Medal = "Gold")
   
 SprintingRecords
 ```
@@ -123,7 +125,8 @@ completeOlympicData<-
   olympicAthleteData%>%
   full_join(SprintingRecords)%>%
   arrange(Record) %>%
-  select(`Athlete(s)`,Sex, Age, Nation, Event, Record, Year, Medal)
+  select(`Athlete(s)`,Sex, Nation, Event, Record, Year, Medal)
 
 completeOlympicData
 ```
+
