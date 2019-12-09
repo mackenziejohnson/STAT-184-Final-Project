@@ -47,13 +47,15 @@ femalerecords<- tableList[[2]]
 malerecords <- 
   malerecords %>%
     filter(grepl(pattern = "\\d*metres$", Event)) %>%
-    mutate(Record = ms(Record))
+    mutate(Record = ms(Record)) %>%
+    mutate(Sex = "M")
 malerecords
 
 femalerecords <-
   femalerecords %>%
     filter(grepl(pattern = "\\d*metres$", Event)) %>%
-    mutate(Record = ms(Record))
+    mutate(Record = ms(Record)) %>%
+    mutate(Sex = "F")
 femalerecords
 ```
 
@@ -75,7 +77,8 @@ olympicAthleteData <-
          Sex = as.character(Sex),
          Sport = as.character(Sport),
          Event = as.character(Event),
-         Medal = as.character(Medal)) %>%
+         Medal = as.character(Medal),
+         Team = as.character(Team)) %>%
   filter(grepl(pattern = "\\d*metres$", Event)) %>%
   mutate(Event = (gsub(pattern = "Athletics Women's|Athletics Men's", replacement = "", Event))) %>%
   rename("Athlete(s)" = Name) %>%
@@ -88,12 +91,25 @@ olympicAthleteData
 ```{r}
 SprintingRecords <-
   SprintingRecords %>%
-  select(Event, Record, Nation, Date, `Athlete(s)`) %>%
+  select(Event, Record, Nation, Date, `Athlete(s)`, Sex) %>%
   mutate(Date = mdy(Date),
          Year = year(Date)) %>%
-  select(Event, Record, Nation, Year, `Athlete(s)`) %>%
+  select(Event, Record, Nation, Year, `Athlete(s)`, Sex) %>%
   mutate(Nation = (gsub(pattern = "\\(.{3}\\)$", replacement = "", Nation)))
   
+SprintingRecords
+```
+### Fix names in secondary data set to match with primary data set
+```{r}
+SprintingRecords <-
+SprintingRecords %>%
+  mutate(`Athlete(s)` = gsub(pattern = "Usain Bolt", replacement = "Usain St. Leo Bolt", `Athlete(s)`)) %>%
+  mutate(`Athlete(s)` = gsub(pattern = "David Rudisha", replacement = "David Lekuta Rudisha", `Athlete(s)`)) %>%
+  mutate(`Athlete(s)` = gsub(pattern = "Noah Ngeny", replacement = "Noah Kiprono Ngeny", `Athlete(s)`)) %>%
+  mutate(`Athlete(s)` = gsub(pattern = "Kenenisa Bekele", replacement = "Kenenisa Bekele Beyecha", `Athlete(s)`)) %>%
+  mutate(`Athlete(s)` = gsub(pattern = "Florence Griffith Joyner", replacement = "Delorez Florence Griffith Joyner", `Athlete(s)`)) %>%
+  mutate(`Athlete(s)` = gsub(pattern = "Marie-José Pérec", replacement = "Marie Jos- Juliana Prec \\(Hontas-\\)", `Athlete(s)`))
+
 SprintingRecords
 ```
 
@@ -102,8 +118,9 @@ SprintingRecords
 completeOlympicData<- 
   olympicAthleteData%>%
   full_join(SprintingRecords)%>%
-  group_by(`Athlete(s)`, )%>%
-  arrange(Record)
+  group_by(`Athlete(s)`) %>%
+  arrange(Record) %>%
+  select(`Athlete(s)`,Sex, Age, Nation, Event, Record, Year, Medal)
+
 completeOlympicData
 ```
-
