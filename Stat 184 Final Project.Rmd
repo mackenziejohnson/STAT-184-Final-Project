@@ -108,7 +108,11 @@ SprintingRecords %>%
   mutate(`Athlete(s)` = gsub(pattern = "Noah Ngeny", replacement = "Noah Kiprono Ngeny", `Athlete(s)`)) %>%
   mutate(`Athlete(s)` = gsub(pattern = "Kenenisa Bekele", replacement = "Kenenisa Bekele Beyecha", `Athlete(s)`)) %>%
   mutate(`Athlete(s)` = gsub(pattern = "Florence Griffith Joyner", replacement = "Delorez Florence Griffith Joyner", `Athlete(s)`)) %>%
-  mutate(`Athlete(s)` = gsub(pattern = "Marie-José Pérec", replacement = "Marie Jos- Juliana Prec \\(Hontas-\\)", `Athlete(s)`))
+  mutate(`Athlete(s)` = gsub(pattern = "Marie-José Pérec", replacement = "Marie Jos- Juliana Prec \\(Hontas-\\)", `Athlete(s)`)) %>%
+  mutate(`Athlete(s)` = gsub(pattern = "Nadezhda Olizarenko", replacement = "Nadiya Fedorivna Olizarenko \\(Mushta-\\)", `Athlete(s)`)) %>%
+  mutate(`Athlete(s)` = gsub(pattern = "Paula Ivan", replacement = "Paula Ivan \\(Ilie\\)", `Athlete(s)`)) %>%
+  mutate(`Athlete(s)` = gsub(pattern = "Vivian Cheruiyot", replacement = "Vivian Jepkemoi Cheruiyot", `Athlete(s)`)) %>%
+  mutate(`Athlete(s)` = gsub(pattern = "Almaz Ayana", replacement = "Almaz Ayana Eba", `Athlete(s)`))
 
 SprintingRecords
 ```
@@ -118,7 +122,6 @@ SprintingRecords
 completeOlympicData<- 
   olympicAthleteData%>%
   full_join(SprintingRecords)%>%
-  group_by(`Athlete(s)`) %>%
   arrange(Record) %>%
   select(`Athlete(s)`,Sex, Age, Nation, Event, Record, Year, Medal)
 
