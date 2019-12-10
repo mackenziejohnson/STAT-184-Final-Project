@@ -131,8 +131,12 @@ completeOlympicData
 ```
 
 ```{r}
+AthleteCounts <-
 completeOlympicData %>%
-  group_by(Nation) %>%
+  group_by(Nation, Sex) %>%
   summarise(count = n()) %>%
-  arrange(desc(count))
+  spread(key = Sex, value = count) %>%
+  mutate(Total = F + M) %>%
+  arrange(desc(Total))
+AthleteCounts
 ```
