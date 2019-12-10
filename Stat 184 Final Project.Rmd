@@ -15,7 +15,7 @@ library(lubridate)
 library(DataComputing)
 ```
 
-# Research Question: How have athletes preformances changed overtime when looking at Olympic Games data? 
+# Research Question: How do track and field sprinting athletes differ between nations in the Olympic Games? 
 
 ### Load Primary Data Source into RNotebook
 ```{r}
@@ -130,3 +130,9 @@ completeOlympicData<-
 completeOlympicData
 ```
 
+```{r}
+completeOlympicData %>%
+  group_by(Nation) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+```
