@@ -141,6 +141,7 @@ completeOlympicData %>%
 AthleteCounts
 ```
 # Graphics
+
 ### Graph of total medal counts by country 
 ```{r}
 SmallerAthleteCounts<-
