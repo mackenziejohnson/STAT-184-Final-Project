@@ -15,7 +15,7 @@ library(lubridate)
 library(DataComputing)
 ```
 
-# Research Question: How do track and field sprinting athletes differ between nations in the Olympic Games? 
+# Research Question: Does being from a certian country make you more likely to medal at the Olypmics for Track and Field?
 
 ### Load Primary Data Source into RNotebook
 ```{r}
@@ -129,7 +129,7 @@ completeOlympicData<-
 
 completeOlympicData
 ```
-
+### Making the data glyph ready 
 ```{r}
 AthleteCounts <-
 completeOlympicData %>%
@@ -140,3 +140,12 @@ completeOlympicData %>%
   arrange(desc(Total))
 AthleteCounts
 ```
+# Graphics
+### Graph of total medal counts by country 
+```{r}
+SmallerAthleteCounts<-
+  AthleteCounts%>%
+  filter(Total > 100)
+ggplot(data = SmallerAthleteCounts, aes(x = M, y = F)) + geom_point()  + aes(colour = Nation) + theme(legend.position = "right") + labs(title = "")
+```
+
