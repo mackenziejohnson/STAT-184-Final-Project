@@ -129,6 +129,7 @@ completeOlympicData<-
 
 completeOlympicData
 ```
+
 ### Making the data glyph ready 
 ```{r}
 AthleteCounts <-
@@ -136,17 +137,38 @@ completeOlympicData %>%
   group_by(Nation, Sex) %>%
   summarise(count = n()) %>%
   spread(key = Sex, value = count) %>%
-  mutate(Total = F + M) %>%
-  arrange(desc(Total))
+  mutate(TotalAthletes = F + M) %>%
+  arrange(desc(TotalAthletes)) %>%
+  na.omit()
 AthleteCounts
+
+MedalCounts <-
+  completeOlympicData %>%
+    group_by(Nation, Medal) %>%
+    summarise(count = n()) %>%
+    spread (key = Medal, value = count) %>%
+    mutate(TotalMedals = sum(Bronze + Gold + Silver)) %>%
+    select(Bronze, Gold, Silver, TotalMedals) %>% 
+    arrange(desc(TotalMedals)) %>%
+    na.omit()
+MedalCounts
+
+Counts <-
+  MedalCounts %>%
+    left_join(AthleteCounts)
+Counts
 ```
 # Graphics
 
-### Graph of total medal counts by country 
+### Plot Athlete Counts vs. Medal Counts by Country
 ```{r}
-SmallerAthleteCounts<-
-  AthleteCounts%>%
-  filter(Total > 100)
-ggplot(data = SmallerAthleteCounts, aes(x = M, y = F)) + geom_point()  + aes(colour = Nation) + theme(legend.position = "right") + labs(title = "")
+Counts %>%
+  ggplot(aes(x = TotalAthletes, y = TotalMedals)) + 
+  geom_point(aes(color = Nation)) + 
+  theme(legend.position = "right") + 
+  labs(title = "Athlete Counts vs. Medal Counts") 
 ```
+This scatterplot demonstrates that countries with more total track and field athletes tend to earn more total medals. 
+
+### Bar Graph of Medal Counts by Country and Event
 
