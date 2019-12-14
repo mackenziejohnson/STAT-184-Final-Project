@@ -31,19 +31,23 @@ output:  html_notebook
 
 
 (A) .Rmd Line number(s) for general data wrangling: 
-
-
+    Line 76: filter() used on primary data set to include only track and field events
+    Lines 137-138 and 147-148: Group by and summarise functions used to create glyph-ready data table
+    
 (B) .Rmd Line number(s) for a join operation: 
-
+    Line 67: Full join of two data sets included in secondary data source
+    Line 126: Full join of primary and secondary data sources
 
 (C) .Rmd Line number(s) for a spread or gather operation (or equivalent):
-
+    Line 139: Spread 'sex' variable into 'M' and 'F' variables
+    Line 149: Spread 'medal' variable into 'Bronze', 'Silver', and 'Gold' variables
 
 (D) .Rmd Line number(s) for use of regular expressions: 
-
+    Lines 50 and 57: filter() and grepl() used to filter data to only sprinting events
+    Lines 107-117: mutate() and gsub() used to make athlete names in both data sets identical
 
 (E) .Rmd Line number(s) for use of reduction and/or transformation functions: 
-
+    Lines 138 and 148: Reduction function, n() used to find number of cases 
 
 (F) .Rmd Line number(s) for use of user-defined functions: 
 
