@@ -171,7 +171,7 @@ Counts %>%
 ```
 This scatterplot demonstrates that countries with more total track and field athletes tend to earn more total medals. The linear model has a wide confidence band, so the relationship between total athletes and total medals is probably not modelled best by a linear relationship. There are most likely other variables that contribute more significantly to the number of medals that a nation earns. 
 
-### Bar Graph
+### Bar Graphs
 ```{r}
 MedalCounts%>%
   filter(TotalMedals > 20) %>%
@@ -181,3 +181,11 @@ MedalCounts%>%
 ```
 This bar graph demonstrates that there are certainly countries that have earned more medals in Track and Field events than others. The United States has clearly earned the most medals, but other countries that have performed well in Track and Field at the Olympics are Great Britain, Kenya, and Jamaica. 
 
+```{r}
+MedalCounts%>%
+  filter(TotalMedals > 20) %>%
+  ggplot(aes(x = Nation, y = Gold)) +
+  geom_bar(stat = "identity", aes(fill = Nation)) +
+  labs(title = "Gold Medal Counts by Country") 
+```
+When we investigate the counts of just the gold medals, the top countries with the highest counts are pretty similar to the countries that earn the highest total counts of medals. The United States and Great Britain are still earn the highest two counts. 
