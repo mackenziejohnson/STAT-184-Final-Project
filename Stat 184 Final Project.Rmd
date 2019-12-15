@@ -165,10 +165,12 @@ Counts
 Counts %>%
   ggplot(aes(x = TotalAthletes, y = TotalMedals)) + 
   geom_point(aes(color = Nation)) + 
+  geom_smooth(method = lm) +
   theme(legend.position = "right") + 
   labs(title = "Athlete Counts vs. Medal Counts") 
 ```
-This scatterplot demonstrates that countries with more total track and field athletes tend to earn more total medals. 
+This scatterplot demonstrates that countries with more total track and field athletes tend to earn more total medals. The linear model has a wide confidence band, so the relationship between total athletes and total medals is probably not modelled best by a linear relationship. There are most likely other variables that contribute more significantly to the number of medals that a nation earns. 
 
 ### Bar Graph of Medal Counts by Country and Event
+
 
