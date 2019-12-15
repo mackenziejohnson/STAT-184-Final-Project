@@ -42,16 +42,17 @@ These lists are from Wikipedia and they are a list of both the male and female c
 # Data Wrangling 
 ### Regular Expression of Olympic Records table 
 ```{r}
+#label appropriate tables
 malerecords<- tableList[[1]]
 femalerecords<- tableList[[2]]
-
+#filter male records 
 malerecords <- 
   malerecords %>%
     filter(grepl(pattern = "\\d*metres$", Event)) %>%
     mutate(Record = ms(Record)) %>%
     mutate(Sex = "M")
 malerecords
-
+#filter female records 
 femalerecords <-
   femalerecords %>%
     filter(grepl(pattern = "\\d*metres$", Event)) %>%
@@ -59,17 +60,19 @@ femalerecords <-
     mutate(Sex = "F")
 femalerecords
 ```
-
+This was done to filter both the male and female records to only keep the records that have metres in that specific event. This made it easier to convert the times into something that we could use for the research question. 
 ### Joining Two Data Tables
 ```{r}
+#join sprinting records
 SprintingRecords <-
   malerecords %>%
     full_join(femalerecords)
 SprintingRecords
 ```
-
+Joined the male and female sprinting records into one table. 
 ### Using Data Verbs on primary data set
 ```{r}
+#fitting the data to match our needs for the research question
 olympicAthleteData <-
   olympicAthleteData%>%
   select(Name, Sex, Age, Team, Year, Sport, Event, Medal)%>%
@@ -87,9 +90,10 @@ olympicAthleteData <-
 
 olympicAthleteData
 ```
-
+Since our research question is looking at if countries perform better than others in Track and Field at the olympics, we didn't need all of the information that the data table provided. For example, we only kept the athletes whose sport was "Athletics", which is the sport for Track and Field in the Olympics. We kept filtering out unnecessary data until we were left with only the athletes that competed in the events that we had records for. 
 ### Using Data verbs on secondary data set
 ```{r}
+#fitting the records data table to match the olympic data table
 SprintingRecords <-
   SprintingRecords %>%
   select(Event, Record, Nation, Date, `Athlete(s)`, Sex) %>%
@@ -103,6 +107,7 @@ SprintingRecords
 ```
 ### Fix names in secondary data set to match with primary data set
 ```{r}
+#fitting the records data table to match the olympic data table
 SprintingRecords <-
 SprintingRecords %>%
   mutate(`Athlete(s)` = gsub(pattern = "Usain Bolt", replacement = "Usain St. Leo Bolt", `Athlete(s)`)) %>%
@@ -118,9 +123,10 @@ SprintingRecords %>%
 
 SprintingRecords
 ```
-
+For these chunks of code, we wrangled the sprinting records table to match that of the Olympic athletes table. This was done so that we could join the two tables and then from there wrangle the data a bit more to make it gylph ready.
 ### Join primary and secondary data set
 ```{r}
+#join of primary and secondary data sets
 completeOlympicData<- 
   olympicAthleteData%>%
   full_join(SprintingRecords)%>%
@@ -129,9 +135,10 @@ completeOlympicData<-
 
 completeOlympicData
 ```
-
+This was an important set in the wrangling process because it was the set the final data table that would be used for making our glyph ready data. This table combined the different countries, records, metals, and athletes that were needed to explain the research question. 
 ### Making the data glyph ready 
 ```{r}
+#making glyph ready data
 AthleteCounts <-
 completeOlympicData %>%
   group_by(Nation, Sex) %>%
@@ -158,21 +165,21 @@ Counts <-
     left_join(AthleteCounts)
 Counts
 ```
+With this data table, each of the countries are its own case. With the variables of metal counts fpr each metal- gold, silver, and bronze, and also the total counts of the total athletes that have competed from each country. With this data we will be able to look at total metal counts by country and see how metal counts compared to the number of athletes that the countries send to the Olympics. 
 # Graphics
-
-### Scatter Plot
-```{r}
-Counts %>%
-  ggplot(aes(x = TotalAthletes, y = TotalMedals)) + 
-  geom_point(aes(color = Nation)) + 
-  geom_smooth(method = lm) +
-  theme(legend.position = "right") + 
-  labs(title = "Athlete Counts vs. Medal Counts by Nation") 
-```
-This scatterplot demonstrates that countries with more total track and field athletes tend to earn more total medals. The linear model has a wide confidence band, so the relationship between total athletes and total medals is probably not modelled best by a linear relationship. There are most likely other variables that contribute more significantly to the number of medals that a nation earns. 
-
 ### Bar Graphs
 ```{r}
+#athlete counts by country 
+AthleteCounts%>%
+  filter(TotalAthletes > 200)%>%
+  ggplot(aes(x = Nation, y = TotalAthletes))+
+  geom_bar(stat = "identity", aes(fill = Nation))+
+  labs(title = "Athlete Counts by Nation")
+```
+This bar graph makes it clear to see that some countries send a lot more athletes to the Olympics compared to other countries. The United States and Great Britain send hundreds more athletes to the Olympics when compared to countries like Spain or Sweden. 
+
+```{r}
+#medal counts by country
 MedalCounts%>%
   filter(TotalMedals > 20) %>%
   ggplot(aes(x = Nation, y = TotalMedals)) +
@@ -182,6 +189,7 @@ MedalCounts%>%
 This bar graph demonstrates that there are certainly countries that have earned more medals in Track and Field events than others. The United States has clearly earned the most medals, but other countries that have performed well in Track and Field at the Olympics are Great Britain, Kenya, and Jamaica. 
 
 ```{r}
+#gold metal counts by country
 MedalCounts%>%
   filter(TotalMedals > 20) %>%
   ggplot(aes(x = Nation, y = Gold)) +
@@ -189,3 +197,14 @@ MedalCounts%>%
   labs(title = "Gold Medal Counts by Country") 
 ```
 When we investigate the counts of just the gold medals, the top countries with the highest counts are pretty similar to the countries that earn the highest total counts of medals. The United States and Great Britain are still earn the highest two counts. 
+### Scatter Plot
+```{r}
+#Metal counts compared to athlete counts by nation
+Counts %>%
+  ggplot(aes(x = TotalAthletes, y = TotalMedals)) + 
+  geom_point(aes(color = Nation)) + 
+  geom_smooth(method = lm) +
+  theme(legend.position = "right") + 
+  labs(title = "Athlete Counts vs. Medal Counts by Nation") 
+```
+This scatterplot demonstrates that countries with more total track and field athletes tend to earn more total medals. The linear model has a wide confidence band, so the relationship between total athletes and total medals is probably not modelled best by a linear relationship. There are most likely other variables that contribute more significantly to the number of medals that a nation earns. 
