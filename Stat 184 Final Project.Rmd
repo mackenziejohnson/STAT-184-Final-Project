@@ -19,7 +19,7 @@ library(DataComputing)
 
 ### Load Primary Data Source into RNotebook
 ```{r}
-#Primary Data Soucre
+#Primary Data Source
 olympicAthleteData <- read.csv(file.choose())
 glimpse(olympicAthleteData)
 ```
@@ -197,6 +197,7 @@ MedalCounts%>%
   labs(title = "Gold Medal Counts by Country") 
 ```
 When we investigate the counts of just the gold medals, the top countries with the highest counts are pretty similar to the countries that earn the highest total counts of medals. The United States and Great Britain are still earn the highest two counts. 
+
 ### Scatter Plot
 ```{r}
 #Metal counts compared to athlete counts by nation
@@ -207,4 +208,19 @@ Counts %>%
   theme(legend.position = "right") + 
   labs(title = "Athlete Counts vs. Medal Counts by Nation") 
 ```
-This scatterplot demonstrates that countries with more total track and field athletes tend to earn more total medals. The linear model has a wide confidence band, so the relationship between total athletes and total medals is probably not modelled best by a linear relationship. There are most likely other variables that contribute more significantly to the number of medals that a nation earns. 
+This scatterplot demonstrates that countries with more total track and field athletes tend to earn more total medals. The linear model has a wide confidence band, so the relationship between total athletes and total medals is probably not modelled best by a linear relationship. There are most likely other variables that contribute more significantly to the number of medals that a nation earns.
+
+```{r}
+RecordCounts <-
+  completeOlympicData %>%
+  select(Nation, Event, Record) %>%
+  filter(is.na(Record) == FALSE)
+
+RecordCounts %>%
+  group_by(Nation) %>%
+  summarise(RecordCount= n()) %>%
+  ggplot(aes(x = Nation, y = RecordCount)) +
+  geom_bar(stat = "identity", aes(fill = Nation)) +
+  labs(title = "Record Counts by Country") 
+```
+This graph shows that the countries with greater counts of track and field athletes do not necessarily perform the best in track and field events. Ethiopia and Kenya currently have the most athletes holding records in sprinting events, yet their athlete counts are small in comparison to countries like the United States and Great Britain. The United States also has athletes who hold records in sprinting events, but Great Britain, the nation with the second highest count of sprinting athletes, does not currently hold any records for those events. 
