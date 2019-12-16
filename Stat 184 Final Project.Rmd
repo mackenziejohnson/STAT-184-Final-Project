@@ -15,7 +15,7 @@ library(lubridate)
 library(DataComputing)
 ```
 
-# Research Question: Do specific countries and/or genders perform better than others in Track and Field events at the Olympic Games?
+# Research Question: Do specific countries perform better than others in Track and Field sprinting events at the Olympic Games?
 
 ### Load Primary Data Source into RNotebook
 ```{r}
