@@ -65,13 +65,14 @@ output:  html_notebook
 
 
 (A) .Rmd Line number(s) for use of mulitple different geoms:
-    Line 167: geom_point() used in visual #1 
+    Line 228: geom_point() used in visual #5
+    Lines 183, 193, 203,218: geom_bar() used in visuals #1-4
 
 (B) .Rmd Line number(s) for use of multiple aesthetics:  
-    Line 167: Color aesthetic used to distinguish nations
+    Lines 183, 193, 203,218: Fill aesthetic used to distinguish nations
 
 (C) .Rmd Line number(s) for use of layered graphics:  
-    Line 168: points and accompanying smoother used to represent relationship between total athletes and total medals
+    Lines 228-229: points and accompanying smoother used to represent relationship between total athletes and total medals
 
 (D) .Rmd Line number(s) for use of leaflet maps:  
 
