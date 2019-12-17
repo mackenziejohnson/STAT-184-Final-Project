@@ -92,7 +92,7 @@ olympicAthleteData <-
 
 olympicAthleteData
 ```
-Since our research question is looking at if countries perform better than others in Track and Field at the olympics, we didn't need all of the information that the data table provided. For example, we only kept the athletes whose sport was "Athletics", which is the sport for Track and Field in the Olympics. We kept filtering out unnecessary data until we were left with only the athletes that competed in the events that we had records for. 
+Since our research question is looking at if countries perform better than others in Track and Field at the olympics, we didn't need all of the information that the data table provided. For example, we only kept the athletes whose sport was "Athletics", which was the label for Track and Field in the data set that we found. We kept filtering out unnecessary data until we were left with only the athletes that competed in the events that we had records for. 
 
 ### Using Data verbs on secondary data set
 ```{r}
@@ -127,7 +127,7 @@ SprintingRecords %>%
 
 SprintingRecords
 ```
-For these chunks of code, we wrangled the sprinting records table to match that of the Olympic athletes table. This was done so that we could join the two tables and then from there wrangle the data a bit more to make it gylph ready.
+For these chunks of code, we wrangled the sprinting records table to match that of the Olympic athletes table. This was done so that we could join the two tables and then from there, wrangle the data a bit more to make it gylph ready.
 
 ### Join primary and secondary data set
 ```{r}
@@ -140,7 +140,7 @@ completeOlympicData<-
 
 completeOlympicData
 ```
-This was an important set in the wrangling process because it was the set the final data table that would be used for making our glyph ready data. This table combined the different countries, records, metals, and athletes that were needed to explain the research question. 
+This was an important data set in the wrangling process because it was the the final data table that would be used for making our glyph-ready data. This table combined the two data sources to create one table with data on the different countries, records, metals, and athletes that we needed to explain the research question. 
 
 ### Making the data glyph ready 
 ```{r}
@@ -171,7 +171,7 @@ Counts <-
     left_join(AthleteCounts)
 Counts
 ```
-With this data table, each of the countries are its own case. With the variables of metal counts fpr each metal- gold, silver, and bronze, and also the total counts of the total athletes that have competed from each country. With this data we will be able to look at total metal counts by country and see how metal counts compared to the number of athletes that the countries send to the Olympics. 
+With this data table, each of the countries are its own case, with the variables of medal counts for each medal- gold, silver, and bronze, and also the total counts of the total athletes that have competed from each country. With this data we will be able to look at total medal counts by country and see how medal counts compared to the athlete counts for each country. 
 
 # Graphics
 ### Bar Graphs
@@ -191,7 +191,7 @@ MedalCounts%>%
   filter(TotalMedals > 20) %>%
   ggplot(aes(x = Nation, y = TotalMedals)) +
   geom_bar(stat = "identity", aes(fill = Nation)) +
-  labs(title = "Medal Counts by Country") 
+  labs(title = "Medal Counts by Nation") 
 ```
 This bar graph demonstrates that there are certainly countries that have earned more medals in Track and Field events than others. The United States has clearly earned the most medals, but other countries that have performed well in Track and Field at the Olympics are Great Britain, Kenya, and Jamaica. 
 
@@ -201,9 +201,9 @@ MedalCounts%>%
   filter(TotalMedals > 20) %>%
   ggplot(aes(x = Nation, y = Gold)) +
   geom_bar(stat = "identity", aes(fill = Nation)) +
-  labs(title = "Gold Medal Counts by Country") 
+  labs(title = "Gold Medal Counts by Nation") 
 ```
-When we investigate the counts of just the gold medals, the top countries with the highest counts are pretty similar to the countries that earn the highest total counts of medals. The United States and Great Britain are still earn the highest two counts. 
+When we investigate the counts of just the gold medals, the top countries with the highest counts are pretty similar to the countries that earn the highest total counts of medals. The United States and Great Britain still earn the highest two counts. 
 
 ```{r}
 RecordCounts <-
@@ -216,7 +216,7 @@ RecordCounts %>%
   summarise(RecordCount= n()) %>%
   ggplot(aes(x = Nation, y = RecordCount)) +
   geom_bar(stat = "identity", aes(fill = Nation)) +
-  labs(title = "Record Counts by Country") 
+  labs(title = "Record Counts by Nation") 
 ```
 This graph shows that the countries with greater counts of track and field athletes do not necessarily perform the best in track and field events. Ethiopia and Kenya currently have the most athletes holding records in sprinting events, yet their athlete counts are small in comparison to countries like the United States and Great Britain. The United States also has athletes who hold records in sprinting events, but Great Britain, the nation with the second highest count of sprinting athletes, does not currently hold any records for those events. 
 
@@ -230,7 +230,7 @@ Counts %>%
   theme(legend.position = "right") + 
   labs(title = "Athlete Counts vs. Medal Counts by Nation") 
 ```
-This scatterplot demonstrates that countries with more total track and field athletes tend to earn more total medals. The linear model has a wide confidence band, so the relationship between total athletes and total medals is probably not modelled best by a linear relationship. There are most likely other variables that contribute more significantly to the number of medals that a nation earns.
+This scatterplot demonstrates that countries with more total track and field athletes tend to earn more total medals on those events. However, the linear model has a wide confidence band, so the relationship between total athletes and total medals might not be modelled best by a simple linear relationship. There are most likely other variables that contribute more significantly to the number of medals that a nation earns.
 
 # Conclusion
-When observing the different graphics of the data, it is very clear to see that some countries do perform better than others. This can be seen when loking at the graphs that look at the total metal counts by each country. The United States has significantly more metals when compared to other countries, followed by Great Britain anf then Kenya. However, there seems to be a relationship between the number of athletes a country sends to the Olympics and the number of metals they receive. For example, the United States has sent more athletes to the Olympics than any other country and they have received the most metals. The same goes for Great Britain who sent the second most athletes to the Olympics, and received the second most metals. This can also be observed in the athlete count verus metal count graph, there is a linear trend that can be determined; giving the expression that as a country sends more athletes to the Olympics, they will receive more metals as a country. However, this relationship between the number of athletes a country sends to the Olympics doesn't appear to apply to the records of the Olympics. The two countries tied with the most records are Ethiopia and Kenya, neither of which are in the top 5 countries for number of athletes sent to the Olympics. 
+When observing the different graphics of the data, it is very clear to see that some countries do perform better than others. This can be seen when loking at the graphs that look at the total medal counts by each country. The United States has significantly more medals when compared to other countries, followed by Great Britain and then Kenya. However, there seems to be a relationship between the number of athletes a country sends to the Olympics and the number of medals they earn. For example, the United States has sent more athletes to the Olympics than any other country and they have received the most medals. The same goes for Great Britain, who sent the second-most athletes to the Olympics and received the second-most medals. This can be observed in the athlete count versus metal count scatter plot which has a moderately strong linear trend. This gives the impression that as a country sends more athletes to the Olympics, they will receive more medals as a country. However, this relationship between the number of athletes a country sends to the Olympics doesn't appear to apply when it comes to the number of records that a country holds. The two countries that are currently tied with the most records are Ethiopia and Kenya, neither of which are in the top 5 countries for number of athletes sent to the Olympics. This proves that the number of athletes is not the only variable that affects the performance of a specific country in track and field events at the Olympics. 
