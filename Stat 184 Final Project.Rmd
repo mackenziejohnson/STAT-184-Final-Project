@@ -136,7 +136,7 @@ completeOlympicData<-
   olympicAthleteData%>%
   full_join(SprintingRecords)%>%
   arrange(Record) %>%
-  select(`Athlete(s)`,Sex, Nation, Event, Record, Year, Medal)
+  select(`Athlete(s)`, Sex, Nation, Event, Record, Year, Medal)
 
 completeOlympicData
 ```
